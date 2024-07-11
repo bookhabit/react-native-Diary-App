@@ -24,6 +24,36 @@ export function LogContextProvider({children}) {
       body: 'Log 05 설명',
       date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
     },
+    {
+      id: Math.random() * 1000,
+      title: 'Log 05',
+      body: 'Log 05 설명',
+      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    },
+    {
+      id: Math.random() * 1000,
+      title: 'Log 05',
+      body: 'Log 05 설명',
+      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    },
+    {
+      id: Math.random() * 1000,
+      title: 'Log 05',
+      body: 'Log 05 설명',
+      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    },
+    {
+      id: Math.random() * 1000,
+      title: 'Log 05',
+      body: 'Log 05 설명',
+      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    },
+    {
+      id: Math.random() * 1000,
+      title: 'Log 05',
+      body: 'Log 05 설명',
+      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
+    },
   ]);
 
   console.log(JSON.stringify(logs, null, 2));
