@@ -2,7 +2,7 @@ import {View, Text, FlatList} from 'react-native';
 import React from 'react';
 import FeedListItem from './FeedListItem';
 
-const FeedList = ({logs, onScrolledToBottom}) => {
+const FeedList = ({logs, onScrolledToBottom, ListHeaderComponent}) => {
   const onScroll = e => {
     if (!onScrolledToBottom) {
       // 버튼을 재사용할 때 스크롤 기능이 들어가지 않는 버튼으로 사용하기 위해서
@@ -33,6 +33,7 @@ const FeedList = ({logs, onScrolledToBottom}) => {
         <View style={{backgroundColor: '#e0e0e0', height: 1, width: '100%'}} />
       )}
       onScroll={onScroll}
+      ListHeaderComponent={ListHeaderComponent}
     />
   );
 };

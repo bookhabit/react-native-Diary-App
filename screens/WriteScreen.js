@@ -15,6 +15,7 @@ const WriteScreen = ({navigation, route}) => {
   const log = route.params?.log;
   const [title, setTitle] = useState(log?.title ?? '');
   const [body, setBody] = useState(log?.body ?? '');
+  const [date, setDate] = useState(log ? new Date(log.date) : new Date());
 
   const {onCreate, onModify, onRemove} = useContext(LogContext);
   const onSave = () => {
@@ -22,7 +23,7 @@ const WriteScreen = ({navigation, route}) => {
       // 기존에 log가 있으면 수정
       onModify({
         id: log.id,
-        date: log.date,
+        date: date.toISOString(),
         title,
         body,
       });
@@ -30,7 +31,7 @@ const WriteScreen = ({navigation, route}) => {
       onCreate({
         title,
         body,
-        date: new Date().toISOString(),
+        date: date.toISOString(),
       });
     }
     navigation.pop();
@@ -66,6 +67,8 @@ const WriteScreen = ({navigation, route}) => {
           onSave={onSave}
           onAskRemove={onAskRemove}
           isEditing={!!log}
+          date={date}
+          onChangeDate={setDate}
         />
         <WriteEditor
           title={title}

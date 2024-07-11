@@ -1,12 +1,37 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useReducer} from 'react';
+import React, {useReducer, useState} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import TransparentCircleButton from '../Button/TransparentCircleButton';
+import {format} from 'date-fns';
+import {ko} from 'date-fns/locale';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 function WriteHeader({onSave, onAskRemove, isEditing, date, onChangeDate}) {
   const navigation = useNavigation();
   const onGoBack = () => {
     navigation.pop();
+  };
+
+  const [mode, setMode] = useState('date');
+  const [visible, setVisible] = useState(false);
+
+  const onPressDate = () => {
+    setMode('date');
+    setVisible(true);
+  };
+
+  const onPressTime = () => {
+    setMode('time');
+    setVisible(true);
+  };
+
+  const onConfirm = selectedDate => {
+    setVisible(false);
+    onChangeDate(selectedDate);
+  };
+
+  const onCancel = () => {
+    setVisible(false);
   };
 
   return (
@@ -33,6 +58,26 @@ function WriteHeader({onSave, onAskRemove, isEditing, date, onChangeDate}) {
           onPress={onSave}
         />
       </View>
+      <View style={styles.center}>
+        <Pressable onPress={onPressDate}>
+          <Text>
+            {format(new Date(date), 'PPP', {
+              locale: ko,
+            })}
+          </Text>
+        </Pressable>
+        <View style={styles.separator} />
+        <Pressable onPress={onPressTime}>
+          <Text>{format(new Date(date), 'p', {locale: ko})}</Text>
+        </Pressable>
+      </View>
+      <DateTimePicker
+        isVisible={visible}
+        mode={mode}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        date={date}
+      />
     </View>
   );
 }
