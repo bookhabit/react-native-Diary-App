@@ -19,11 +19,14 @@ function WriteHeader({onSave, onAskRemove, isEditing, date, onChangeDate}) {
         />
       </View>
       <View style={styles.buttons}>
-        <TransparentCircleButton
-          name="delete-forever"
-          color="#ef5350"
-          hasMarginRight
-        />
+        {isEditing && (
+          <TransparentCircleButton
+            name="delete-forever"
+            color="#ef5350"
+            hasMarginRight
+            onPress={onAskRemove}
+          />
+        )}
         <TransparentCircleButton
           name="check"
           color="#009688"

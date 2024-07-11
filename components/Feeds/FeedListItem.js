@@ -2,6 +2,7 @@ import {View, Text, Pressable, StyleSheet} from 'react-native';
 import React from 'react';
 import {format, formatDistanceToNow} from 'date-fns';
 import {ko} from 'date-fns/locale';
+import {useNavigation} from '@react-navigation/native';
 
 function truncate(text) {
   // 정규식을 사용해 모든 줄 바꿈 문자 제거
@@ -30,13 +31,22 @@ function formatDate(date) {
 
 const FeedListItem = ({log}) => {
   const {date, title, body} = log;
+  const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.navigate('Write', {
+      log,
+    });
+  };
+
   return (
     <Pressable
       style={({pressed}) => [
         styles.block,
         Platform.OS === 'ios' && pressed && {backgroundColor: '#efefef'},
       ]}
-      android_ripple={{color: '#ededed'}}>
+      android_ripple={{color: '#ededed'}}
+      onPress={onPress}>
       <Text style={styles.date}>{formatDate(date)}</Text>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.body}>{truncate(body)}</Text>

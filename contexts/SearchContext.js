@@ -1,12 +1,15 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import React, {createContext, useState} from 'react';
 
-const SearchContext = () => {
+const SearchContext = createContext();
+
+export function SearchContextProvider({children}) {
+  const [keyword, onChangeText] = useState('');
+
   return (
-    <View>
-      <Text>SearchContext</Text>
-    </View>
+    <SearchContext.Provider value={{keyword, onChangeText}}>
+      {children}
+    </SearchContext.Provider>
   );
-};
+}
 
 export default SearchContext;

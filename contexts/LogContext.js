@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Alert} from 'react-native';
 import React, {createContext, useState} from 'react';
 import {v4 as uuidv4} from 'uuid';
 
@@ -36,25 +36,18 @@ export function LogContextProvider({children}) {
       body: 'Log 05 설명',
       date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
     },
-    {
-      id: Math.random() * 1000,
-      title: 'Log 05',
-      body: 'Log 05 설명',
-      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
-    },
-    {
-      id: Math.random() * 1000,
-      title: 'Log 05',
-      body: 'Log 05 설명',
-      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
-    },
-    {
-      id: Math.random() * 1000,
-      title: 'Log 05',
-      body: 'Log 05 설명',
-      date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
-    },
   ]);
+
+  const onModify = modified => {
+    console.log('modified', modified);
+    const nextLogs = logs.map(log => (log.id === modified.id ? modified : log));
+    setLogs(nextLogs);
+  };
+
+  const onRemove = id => {
+    const nextLogs = logs.filter(log => log.id !== id);
+    setLogs(nextLogs);
+  };
 
   console.log(JSON.stringify(logs, null, 2));
 
@@ -70,7 +63,7 @@ export function LogContextProvider({children}) {
   };
 
   return (
-    <LogContext.Provider value={{logs, onCreate}}>
+    <LogContext.Provider value={{logs, onCreate, onModify, onRemove}}>
       {children}
     </LogContext.Provider>
   );
