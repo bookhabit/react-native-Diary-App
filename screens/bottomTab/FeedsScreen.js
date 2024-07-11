@@ -1,10 +1,11 @@
-import {View, Text} from 'react-native';
-import React from 'react';
+import {View, Text, TextInput} from 'react-native';
+import React, {useContext} from 'react';
+import FloatingWriteButton from '../../components/Button/FloatingWriteButton';
 
 const FeedsScreen = () => {
   return (
-    <View>
-      <Text>FeedsScreen</Text>
+    <View style={{flex: 1}}>
+      <FloatingWriteButton />
     </View>
   );
 };

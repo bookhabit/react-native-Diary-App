@@ -14,7 +14,11 @@ const RootStackNavigator = () => {
         component={MainBottomTab}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="Write" component={WriteScreen} />
+      <Stack.Screen
+        name="Write"
+        component={WriteScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };
